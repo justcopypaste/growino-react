@@ -18,7 +18,7 @@
 
 function navbar(theme, ownerState) {
   const { palette, boxShadows, functions, transitions, breakpoints, borders } = theme;
-  const { transparentNavbar, absolute, light } = ownerState;
+  const { transparentNavbar, absolute, light, isMobile } = ownerState;
 
   const { dark, white, text, transparent, gradients, borderCol } = palette;
   const { navbarBoxShadow } = boxShadows;
@@ -80,15 +80,19 @@ function navbar(theme, ownerState) {
 
       [breakpoints.up("sm")]: {
         minHeight: "auto",
-        padding: `${pxToRem(4)} ${pxToRem(16)}`,
+        padding: `${pxToRem(4)} ${pxToRem(8)}`,
       },
+    },
+    
+    [breakpoints.up("sm")]: {
+      display: "none"
     },
   };
 }
 
 const navbarContainer = ({ breakpoints }) => ({
-  flexDirection: "column",
-  alignItems: "flex-start",
+  flexDirection: "row",
+  alignItems: "center",
   justifyContent: "space-between",
   pt: 0.5,
   pb: 0.5,
@@ -96,6 +100,7 @@ const navbarContainer = ({ breakpoints }) => ({
   [breakpoints.up("md")]: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     paddingTop: "0",
     paddingBottom: "0",
   },
@@ -104,8 +109,6 @@ const navbarContainer = ({ breakpoints }) => ({
 const navbarRow = ({ breakpoints, palette: { white } }, { isMini }) => ({
   display: "flex",
   alignItems: "center",
-  justifyContent: "space-between",
-  width: "100%",
   "&.MuiBox-root": {
     "& nav": {
       "& ol": {

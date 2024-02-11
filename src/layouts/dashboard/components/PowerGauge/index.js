@@ -1,18 +1,34 @@
 import React from 'react';
-import { Card } from '@mui/material';
+import { Card, Stack } from '@mui/material';
 import VuiBox from 'components/VuiBox';
 import VuiTypography from 'components/VuiTypography';
 import colors from 'assets/theme/base/colors';
 import { FaEllipsisH } from 'react-icons/fa';
 import linearGradient from 'assets/theme/functions/linearGradient';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useState, useEffect } from 'react';
 
-function ReferralTracking() {
+function PowerGauge() {
 	const { info, gradients } = colors;
 	const { cardContent } = gradients;
+	
+	const [power, setPower] = useState([]);
+	useEffect(() => {
+		fetch('http://18.231.107.220/sensor/get?tent=1')
+			.then((res) => res.json())
+			.then((data) => {
+				setPower(parseInt(data[0].power))
+			}).catch(()=>{
+				setPower(420)
+			});
+	}, []);
 
 	return (
-		<Card>
+		<Card
+			sx={{
+				height: '100%',
+				background: linearGradient(gradients.cardDark.main, gradients.cardDark.state, gradients.cardDark.deg)
+			}}>
 			<VuiBox sx={{ width: '100%' }}>
 				<VuiBox
 					display='flex'
@@ -20,17 +36,9 @@ function ReferralTracking() {
 					justifyContent='space-beetween'
 					sx={{ width: '100%' }}
 					mb='40px'>
-					<VuiTypography variant='lg' color='white' mr='auto'>
-						تتبع الإحالة
+					<VuiTypography variant='lg' color='white' mr='auto' fontWeight='bold'>
+						Consumo
 					</VuiTypography>
-					<VuiBox
-						display='flex'
-						justifyContent='center'
-						alignItems='center'
-						bgColor='#22234B'
-						sx={{ width: '37px', height: '37px', cursor: 'pointer', borderRadius: '12px' }}>
-						<FaEllipsisH color={info.main} size='18px' />
-					</VuiBox>
 				</VuiBox>
 				<VuiBox
 					display='flex'
@@ -47,7 +55,7 @@ function ReferralTracking() {
 							alignItems: 'center'
 						}
 					})}>
-					<VuiBox
+					<Stack
 						direction='column'
 						spacing='20px'
 						width='500px'
@@ -59,7 +67,7 @@ function ReferralTracking() {
 							},
 							[breakpoints.only('xl')]: {
 								width: '500px',
-								maxWidth: '38%'
+								maxWidth: '40%'
 							}
 						})}>
 						<VuiBox
@@ -79,17 +87,16 @@ function ReferralTracking() {
 								}
 							})}>
 							<VuiTypography color='text' variant='button' fontWeight='regular' mb='5px'>
-								مدعو
+								Este mes
 							</VuiTypography>
 							<VuiTypography color='white' variant='lg' fontWeight='bold'>
-								145 شخصا
+								5.2kWh
 							</VuiTypography>
 						</VuiBox>
 						<VuiBox
 							display='flex'
 							width='220px'
 							p='20px 22px'
-							mb='20px'
 							flexDirection='column'
 							sx={({ breakpoints }) => ({
 								background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
@@ -103,19 +110,19 @@ function ReferralTracking() {
 								}
 							})}>
 							<VuiTypography color='text' variant='button' fontWeight='regular' mb='5px'>
-								علاوة
+								Costo
 							</VuiTypography>
 							<VuiTypography color='white' variant='lg' fontWeight='bold'>
-								1,465
+								$108
 							</VuiTypography>
 						</VuiBox>
-					</VuiBox>
+					</Stack>
 					<VuiBox sx={{ position: 'relative', display: 'inline-flex' }}>
 						<CircularProgress
 							variant='determinate'
-							value={70}
+							value={power/6}
 							size={window.innerWidth >= 1024 ? 200 : window.innerWidth >= 768 ? 170 : 200}
-							color='success'
+							color='warning'
 						/>
 						<VuiBox
 							sx={{
@@ -130,13 +137,19 @@ function ReferralTracking() {
 							}}>
 							<VuiBox display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
 								<VuiTypography color='text' variant='button' mb='4px'>
-									أمان
+									Tiempo Real
 								</VuiTypography>
-								<VuiTypography color='white' variant='d5' fontWeight='bold' mb='4px'>
-									9.3
-								</VuiTypography>
-								<VuiTypography color='text' variant='button'>
-									مجموع النقاط
+								<VuiTypography
+									color='white'
+									variant='d5'
+									fontWeight='bold'
+									mb='4px'
+									sx={({ breakpoints }) => ({
+										[breakpoints.only('xl')]: {
+											fontSize: '32px'
+										}
+									})}>
+									{power}w
 								</VuiTypography>
 							</VuiBox>
 						</VuiBox>
@@ -147,4 +160,4 @@ function ReferralTracking() {
 	);
 }
 
-export default ReferralTracking;
+export default PowerGauge;

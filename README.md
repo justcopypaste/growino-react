@@ -298,9 +298,9 @@ vision-dashboard-react-free/
     │   │   │   │   └── index.js
     │   │   │   ├── RefferalTracking
     │   │   │   │   └── index.js
-    │   │   │   ├── SatisfactionRate
+    │   │   │   ├── TempGauge
     │   │   │   │   └── index.js
-    │   │   │   └── WelcomeMark
+    │   │   │   └── Camera
     │   │   │       └── index.js
     │   │   ├── data
     │   │   │   ├── barChartData.js
@@ -332,9 +332,9 @@ vision-dashboard-react-free/
     │   │   │   │   └── index.js
     │   │   │   ├── RefferalTracking
     │   │   │   │   └── index.js
-    │   │   │   ├── SatisfactionRate
+    │   │   │   ├── TempGauge
     │   │   │   │   └── index.js
-    │   │   │   └── WelcomeMark
+    │   │   │   └── Camera
     │   │   │       └── index.js
     │   │   ├── data
     │   │   │   ├── barChartData.js

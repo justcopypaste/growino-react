@@ -16,13 +16,34 @@
 
 */
 
-export const lineChartDataDashboard = [
+export const tempChartData = [
   {
-    name: "Mobile apps",
+    name: "Temperatura",
     data: [500, 250, 300, 220, 500, 250, 300, 230, 300, 350, 250, 400],
   },
   {
-    name: "Websites",
+    name: "Humedad",
     data: [200, 230, 300, 350, 370, 420, 550, 350, 400, 500, 330, 550],
+  },
+];
+
+
+
+export const soilChartData = [
+  {
+    name: "1-White Widow",
+    data: [220, 500, 250, 300, 230, 300, 350, 250, 400, 500, 250, 300],
+  },
+  {
+    name: "2-Amnesia",
+    data: [200, 230, 300, 350, 370, 420, 550, 350, 400, 500, 330, 550],
+  },
+  {
+    name: "3-Ginger Punch",
+    data: [330, 230, 370, 420, 550, 350, 400, 500, 550, 230, 300, 350],
+  },
+  {
+    name: "4-Gorila Glue",
+    data: [350, 370, 420, 300, 220, 500, 350, 250, 400, 200, 230, 300],
   },
 ];

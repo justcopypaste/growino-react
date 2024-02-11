@@ -50,9 +50,6 @@ function reducer(state, action) {
     case "FIXED_NAVBAR": {
       return { ...state, fixedNavbar: action.value };
     }
-    case "OPEN_CONFIGURATOR": {
-      return { ...state, openConfigurator: action.value };
-    }
     case "DIRECTION": {
       return { ...state, direction: action.value };
     }
@@ -72,8 +69,7 @@ function VisionUIControllerProvider({ children }) {
     transparentSidenav: true,
     sidenavColor: "info",
     transparentNavbar: true,
-    fixedNavbar: true,
-    openConfigurator: false,
+    fixedNavbar: false,
     direction: "ltr",
     layout: "dashboard",
   };
@@ -105,7 +101,6 @@ const setTransparentSidenav = (dispatch, value) => dispatch({ type: "TRANSPARENT
 const setSidenavColor = (dispatch, value) => dispatch({ type: "SIDENAV_COLOR", value });
 const setTransparentNavbar = (dispatch, value) => dispatch({ type: "TRANSPARENT_NAVBAR", value });
 const setFixedNavbar = (dispatch, value) => dispatch({ type: "FIXED_NAVBAR", value });
-const setOpenConfigurator = (dispatch, value) => dispatch({ type: "OPEN_CONFIGURATOR", value });
 const setDirection = (dispatch, value) => dispatch({ type: "DIRECTION", value });
 const setLayout = (dispatch, value) => dispatch({ type: "LAYOUT", value });
 
@@ -117,7 +112,6 @@ export {
   setSidenavColor,
   setTransparentNavbar,
   setFixedNavbar,
-  setOpenConfigurator,
   setDirection,
   setLayout,
 };

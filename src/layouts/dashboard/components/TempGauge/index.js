@@ -1,29 +1,40 @@
 import React from 'react';
 
-import { Card, Stack } from '@mui/material';
+import { Card } from '@mui/material';
 import VuiBox from 'components/VuiBox';
 import VuiTypography from 'components/VuiTypography';
-import CircularProgress from '@mui/material/CircularProgress';
-import { IoHappy } from 'react-icons/io5';
+import { IoThermometerSharp } from 'react-icons/io5';
 import colors from 'assets/theme/base/colors';
 import linearGradient from 'assets/theme/functions/linearGradient';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useState, useEffect } from 'react';
+// import {BrowserView} from 'react-device-detect';
 
-const SatisfactionRate = () => {
-	const { info, gradients } = colors;
+const TempGauge = () => {
+	const { gradients } = colors;
 	const { cardContent } = gradients;
+
+
+	const [temp, setTemp] = useState([]);
+	useEffect(() => {
+		fetch('http://18.231.107.220/sensor/get?tent=1')
+			.then((res) => res.json())
+			.then((data) => {
+				setTemp(parseFloat(data[0].temperature))
+			}).catch(() => {
+				setTemp(69)
+			});
+	}, []);
 
 	return (
 		<Card sx={{ height: '340px' }}>
-			<VuiBox display='flex' flexDirection='column'>
+			<VuiBox display='flex' flexDirection='column' justifyContent="center" alignItems="center">
 				<VuiTypography variant='lg' color='white' fontWeight='bold' mb='4px'>
-					معدل الرضا
-				</VuiTypography>
-				<VuiTypography variant='button' color='text' fontWeight='regular' mb='20px'>
-					من جميع المشاريع
+					Temperatura
 				</VuiTypography>
 				<VuiBox sx={{ alignSelf: 'center', justifySelf: 'center', zIndex: '-1' }}>
-					<VuiBox sx={{ position: 'relative', display: 'inline-flex' }}>
-						<CircularProgress variant='determinate' value={60} size={170} color='info' />
+					<VuiBox sx={{ position: 'relative', display: 'inline-flex' }} marginTop="10px">
+						<CircularProgress variant='determinate' value={temp * 2.5} size={150} color='error' />
 						<VuiBox
 							sx={{
 								top: 0,
@@ -37,8 +48,7 @@ const SatisfactionRate = () => {
 							}}>
 							<VuiBox
 								sx={{
-									background: info.main,
-									transform: 'translateY(-50%)',
+									background: "#fff",
 									width: '50px',
 									height: '50px',
 									borderRadius: '50%',
@@ -46,48 +56,50 @@ const SatisfactionRate = () => {
 									justifyContent: 'center',
 									alignItems: 'center'
 								}}>
-								<IoHappy size='30px' color='#fff' />
+								<IoThermometerSharp size='30px' color='#e31a1a' />
 							</VuiBox>
 						</VuiBox>
 					</VuiBox>
 				</VuiBox>
-				<Stack
+				<VuiBox
 					sx={({ breakpoints }) => ({
 						width: '90%',
+						marginTop: "10px",
 						padding: '18px 22px',
 						display: 'flex',
-						justifyContent: 'space-between',
+						justifyContent: 'center',
 						flexDirection: 'row',
 						height: '82px',
 						mx: 'auto',
 						borderRadius: '20px',
 						background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
-						transform: 'translateY(-90%)',
 						zIndex: '1000'
 					})}>
-					<VuiTypography color='text' variant='caption' display='inline-block' fontWeight='regular'>
-						0%
-					</VuiTypography>
+					{/* <BrowserView>
+						<VuiTypography color='text' variant='caption' display='inline-block' fontWeight='regular'>
+							10°
+						</VuiTypography>
+					</BrowserView> */}
 					<VuiBox
 						flexDirection='column'
 						display='flex'
 						justifyContent='center'
 						alignItems='center'
-						sx={{ minWidth: '80px' }}>
+						sx={{ minWidth: '60px' }}>
 						<VuiTypography color='white' variant='h3'>
-							95%
-						</VuiTypography>
-						<VuiTypography color='text' variant='caption' fontWeight='regular'>
-							بناء على الإعجابات
+							{temp}°
 						</VuiTypography>
 					</VuiBox>
-					<VuiTypography color='text' variant='caption' display='inline-block' fontWeight='regular'>
-						100%
-					</VuiTypography>
-				</Stack>
+
+					{/* <BrowserView>
+						<VuiTypography color='text' variant='caption' display='inline-block' fontWeight='regular' textAlign="center">
+							40°
+						</VuiTypography>
+					</BrowserView> */}
+				</VuiBox>
 			</VuiBox>
 		</Card>
 	);
 };
 
-export default SatisfactionRate;
+export default TempGauge;

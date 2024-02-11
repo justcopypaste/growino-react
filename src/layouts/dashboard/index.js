@@ -38,37 +38,76 @@ import typography from "assets/theme/base/typography";
 import colors from "assets/theme/base/colors";
 
 // Dashboard layout components
-import WelcomeMark from "layouts/dashboard/components/WelcomeMark";
+import Camera from "layouts/dashboard/components/Camera";
 import Projects from "layouts/dashboard/components/Projects";
 import OrderOverview from "layouts/dashboard/components/OrderOverview";
-import SatisfactionRate from "layouts/dashboard/components/SatisfactionRate";
-import ReferralTracking from "layouts/dashboard/components/ReferralTracking";
+import TempGauge from "layouts/dashboard/components/TempGauge";
+import HumGauge from "layouts/dashboard/components/HumGauge";
+import PowerGauge from "layouts/dashboard/components/PowerGauge";
+import SoilChart from "layouts/dashboard/components/SoilChart";
+import TempChart from "layouts/dashboard/components/TempChart";
 
 // React icons
 import { IoIosRocket } from "react-icons/io";
-import { IoGlobe } from "react-icons/io5";
+import { IoCash, IoGlobe, IoPower, IoPricetag } from "react-icons/io5";
 import { IoBuild } from "react-icons/io5";
 import { IoWallet } from "react-icons/io5";
 import { IoDocumentText } from "react-icons/io5";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaBolt, FaDollarSign, FaShoppingCart } from "react-icons/fa";
 
 // Data
 import LineChart from "examples/Charts/LineCharts/LineChart";
 import BarChart from "examples/Charts/BarCharts/BarChart";
-import { lineChartDataDashboard } from "layouts/dashboard/data/lineChartData";
-import { lineChartOptionsDashboard } from "layouts/dashboard/data/lineChartOptions";
+import { tempChartData, soilChartData } from "layouts/dashboard/data/lineChartData";
+import { tempChartOptions, soilChartOptions } from "layouts/dashboard/data/lineChartOptions";
 import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
 import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
+
+
+
+function getSensorData() {
+  fetch("http://18.231.107.220/sensor/get?tent=1", {
+    headers: {
+      "User-Agent": "PostmanRuntime/7.29.2",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+
+      // for (const reading of data) {
+      //   if (reading.temperature) {
+      //     temp.push(reading.temperature);
+      //   }
+      //   if (reading.humidity) {
+      //     hum.push(reading.humidity);
+      //   }
+      //   if (reading.power) {
+      //     power.push(reading.power);
+      //   }
+      //   if (reading.soil) {
+      //     soil.push(reading.soil);
+      //   }
+      // }
+    
+      console.log(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
 
 function Dashboard() {
   const { gradients } = colors;
   const { cardContent } = gradients;
 
+  // getSensorData()
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <VuiBox py={3}>
-        <VuiBox mb={3}>
+        {/* <VuiBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} xl={3}>
               <MiniStatisticsCard
@@ -103,46 +142,33 @@ function Dashboard() {
               />
             </Grid>
           </Grid>
-        </VuiBox>
+        </VuiBox> */}
         <VuiBox mb={3}>
           <Grid container spacing="18px">
-            <Grid item xs={12} lg={12} xl={5}>
-              <WelcomeMark />
+            <Grid item xs={12} lg={12} xl={6}>
+              <Camera />
             </Grid>
-            <Grid item xs={12} lg={6} xl={3}>
-              <SatisfactionRate />
+            <Grid item xs={6} lg={6} xl={3}>
+              <TempGauge />
             </Grid>
-            <Grid item xs={12} lg={6} xl={4}>
-              <ReferralTracking />
+            <Grid item xs={6} lg={6} xl={3}>
+              <HumGauge />
+            </Grid>
+            <Grid item xs={12} lg={6} xl={6}>
+              <SoilChart/>
+            </Grid>
+
+            <Grid item xs={12} lg={6} xl={6}>
+              <PowerGauge />
             </Grid>
           </Grid>
         </VuiBox>
         <VuiBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} lg={6} xl={7}>
-              <Card>
-                <VuiBox sx={{ height: "100%" }}>
-                  <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    Sales Overview
-                  </VuiTypography>
-                  <VuiBox display="flex" alignItems="center" mb="40px">
-                    <VuiTypography variant="button" color="success" fontWeight="bold">
-                      +5% more{" "}
-                      <VuiTypography variant="button" color="text" fontWeight="regular">
-                        in 2021
-                      </VuiTypography>
-                    </VuiTypography>
-                  </VuiBox>
-                  <VuiBox sx={{ height: "310px" }}>
-                    <LineChart
-                      lineChartData={lineChartDataDashboard}
-                      lineChartOptions={lineChartOptionsDashboard}
-                    />
-                  </VuiBox>
-                </VuiBox>
-              </Card>
+            <Grid item xs={12} lg={6} xl={6}>
+              <TempChart/>
             </Grid>
-            <Grid item xs={12} lg={6} xl={5}>
+            <Grid item xs={12} lg={6} xl={6}>
               <Card>
                 <VuiBox>
                   <VuiBox
@@ -162,17 +188,6 @@ function Dashboard() {
                       barChartOptions={barChartOptionsDashboard}
                     />
                   </VuiBox>
-                  <VuiTypography variant="lg" color="white" fontWeight="bold" mb="5px">
-                    Active Users
-                  </VuiTypography>
-                  <VuiBox display="flex" alignItems="center" mb="40px">
-                    <VuiTypography variant="button" color="success" fontWeight="bold">
-                      (+23){" "}
-                      <VuiTypography variant="button" color="text" fontWeight="regular">
-                        than last week
-                      </VuiTypography>
-                    </VuiTypography>
-                  </VuiBox>
                   <Grid container spacing="50px">
                     <Grid item xs={6} md={3} lg={3}>
                       <Stack
@@ -187,14 +202,14 @@ function Dashboard() {
                           alignItems="center"
                           sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
                         >
-                          <IoWallet color="#fff" size="12px" />
+                          <FaBolt color="#fff" size="12px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Users
+                          Junio
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        32,984
+                        5.2kWh
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
                     </Grid>
@@ -211,14 +226,14 @@ function Dashboard() {
                           alignItems="center"
                           sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
                         >
-                          <IoIosRocket color="#fff" size="12px" />
+                          <FaDollarSign color="#fff" size="12px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Clicks
+                          Junio
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        2,42M
+                        $108
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
                     </Grid>
@@ -235,14 +250,14 @@ function Dashboard() {
                           alignItems="center"
                           sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
                         >
-                          <FaShoppingCart color="#fff" size="12px" />
+                          <FaBolt color="#fff" size="12px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Sales
+                          Cultivo
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        2,400$
+                        16.2kWh
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
                     </Grid>
@@ -259,14 +274,14 @@ function Dashboard() {
                           alignItems="center"
                           sx={{ borderRadius: "6px", width: "25px", height: "25px" }}
                         >
-                          <IoBuild color="#fff" size="12px" />
+                          <FaDollarSign color="#fff" size="12px" />
                         </VuiBox>
                         <VuiTypography color="text" variant="button" fontWeight="medium">
-                          Items
+                          Cultivo
                         </VuiTypography>
                       </Stack>
                       <VuiTypography color="white" variant="lg" fontWeight="bold" mb="8px">
-                        320
+                        $420
                       </VuiTypography>
                       <VuiProgress value={60} color="info" sx={{ background: "#2D2E5F" }} />
                     </Grid>
@@ -276,16 +291,16 @@ function Dashboard() {
             </Grid>
           </Grid>
         </VuiBox>
-        <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
+        {/* <Grid container spacing={3} direction="row" justifyContent="center" alignItems="stretch">
           <Grid item xs={12} md={6} lg={8}>
             <Projects />
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <OrderOverview />
           </Grid>
-        </Grid>
+        </Grid> */}
       </VuiBox>
-      <Footer />
+      {/* <Footer /> */}
     </DashboardLayout>
   );
 }

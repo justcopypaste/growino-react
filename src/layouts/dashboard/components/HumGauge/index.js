@@ -3,27 +3,38 @@ import React from 'react';
 import { Card } from '@mui/material';
 import VuiBox from 'components/VuiBox';
 import VuiTypography from 'components/VuiTypography';
-import { IoHappy } from 'react-icons/io5';
+import { IoWater } from 'react-icons/io5';
 import colors from 'assets/theme/base/colors';
 import linearGradient from 'assets/theme/functions/linearGradient';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useState, useEffect } from 'react';
+// import { BrowserView } from 'react-device-detect';
 
-const SatisfactionRate = () => {
+
+const HumGauge = () => {
 	const { info, gradients } = colors;
 	const { cardContent } = gradients;
 
+	const [humidity, setHumidity] = useState([]);
+	useEffect(() => {
+		fetch('http://18.231.107.220/sensor/get?tent=1')
+			.then((res) => res.json())
+			.then((data) => {
+				setHumidity(parseInt(data[0].humidity))
+			}).catch(() => {
+				setHumidity(69)
+			});
+	}, []);
+
 	return (
 		<Card sx={{ height: '340px' }}>
-			<VuiBox display='flex' flexDirection='column'>
+			<VuiBox display='flex' flexDirection='column' justifyContent="center" alignItems="center">
 				<VuiTypography variant='lg' color='white' fontWeight='bold' mb='4px'>
-					Satisfaction Rate
-				</VuiTypography>
-				<VuiTypography variant='button' color='text' fontWeight='regular' mb='20px'>
-					From all projects
+					Humedad
 				</VuiTypography>
 				<VuiBox sx={{ alignSelf: 'center', justifySelf: 'center', zIndex: '-1' }}>
-					<VuiBox sx={{ position: 'relative', display: 'inline-flex' }}>
-						<CircularProgress variant='determinate' value={60} size={170} color='info' />
+					<VuiBox sx={{ position: 'relative', display: 'inline-flex' }} marginTop="10px">
+						<CircularProgress variant='determinate' value={humidity * 1} size={150} color='info' />
 						<VuiBox
 							sx={{
 								top: 0,
@@ -37,8 +48,7 @@ const SatisfactionRate = () => {
 							}}>
 							<VuiBox
 								sx={{
-									background: info.main,
-									transform: 'translateY(-50%)',
+									background: "#fff",
 									width: '50px',
 									height: '50px',
 									borderRadius: '50%',
@@ -46,7 +56,7 @@ const SatisfactionRate = () => {
 									justifyContent: 'center',
 									alignItems: 'center'
 								}}>
-								<IoHappy size='30px' color='#fff' />
+								<IoWater size='30px' color={info.main} />
 							</VuiBox>
 						</VuiBox>
 					</VuiBox>
@@ -54,40 +64,41 @@ const SatisfactionRate = () => {
 				<VuiBox
 					sx={({ breakpoints }) => ({
 						width: '90%',
+						marginTop: "10px",
 						padding: '18px 22px',
 						display: 'flex',
-						justifyContent: 'space-between',
+						justifyContent: 'center',
 						flexDirection: 'row',
 						height: '82px',
 						mx: 'auto',
 						borderRadius: '20px',
 						background: linearGradient(cardContent.main, cardContent.state, cardContent.deg),
-						transform: 'translateY(-90%)',
 						zIndex: '1000'
 					})}>
-					<VuiTypography color='text' variant='caption' display='inline-block' fontWeight='regular'>
-						0%
-					</VuiTypography>
+					{/* <BrowserView>
+						<VuiTypography color='text' variant='caption' display='inline-block' fontWeight='regular'>
+							0%
+						</VuiTypography>
+					</BrowserView> */}
 					<VuiBox
 						flexDirection='column'
 						display='flex'
 						justifyContent='center'
 						alignItems='center'
-						sx={{ minWidth: '80px' }}>
+						sx={{ minWidth: '60px' }}>
 						<VuiTypography color='white' variant='h3'>
-							95%
-						</VuiTypography>
-						<VuiTypography color='text' variant='caption' fontWeight='regular'>
-							Based on likes
+							{humidity}%
 						</VuiTypography>
 					</VuiBox>
-					<VuiTypography color='text' variant='caption' display='inline-block' fontWeight='regular'>
-						100%
-					</VuiTypography>
+					{/* <BrowserView>
+						<VuiTypography color='text' variant='caption' display='inline-block' fontWeight='regular' textAlign="center">
+							100%
+						</VuiTypography>
+					</BrowserView> */}
 				</VuiBox>
 			</VuiBox>
 		</Card>
 	);
 };
 
-export default SatisfactionRate;
+export default HumGauge;
