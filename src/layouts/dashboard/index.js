@@ -66,7 +66,7 @@ import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions
 
 
 function getSensorData() {
-  fetch("http://18.231.107.220/sensor/get?tent=1", {
+  fetch("http://54.94.8.124/sensor/get?tent=1", {
     headers: {
       "User-Agent": "PostmanRuntime/7.29.2",
       "Content-Type": "application/json",

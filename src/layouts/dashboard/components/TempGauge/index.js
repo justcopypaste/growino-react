@@ -17,7 +17,7 @@ const TempGauge = () => {
 
 	const [temp, setTemp] = useState([]);
 	useEffect(() => {
-		fetch('http://18.231.107.220/sensor/get?tent=1')
+		fetch('http://54.94.8.124/sensor/get?tent=1')
 			.then((res) => res.json())
 			.then((data) => {
 				setTemp(parseFloat(data[0].temperature))
