@@ -8,7 +8,7 @@ function TempChart() {
     const [data, setData] = useState([]);
     const [times, setTimes] = useState([]);
     useEffect(() => {
-        fetch('http://54.94.8.124/sensor/get?tent=1')
+        fetch('http://18.231.172.73/sensor/get?tent=1')
             .then((res) => res.json())
             .then((data) => {
                 const _temp = []

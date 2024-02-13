@@ -31,15 +31,6 @@ export default {
       backgroundColor: transparent.main,
       boxShadow: xxl,
       borderRadius: borderRadius.xl,
-      "& thead": {
-        "& tr": {
-          "& th": {
-            "&:first-of-type": {
-              paddingLeft: "0px !important",
-            },
-          },
-        },
-      },
       "& .MuiTableBody-root": {
         "& tr": {
           "& td": {

@@ -10,38 +10,46 @@ function SoilChart() {
     const [soil, setData] = useState([]);
     const [times, setTimes] = useState([]);
     useEffect(() => {
-        fetch('http://54.94.8.124/sensor/get?tent=1')
+        fetch('http://18.231.172.73/plant')
             .then((res) => res.json())
-            .then((data) => {
-                const _soil = []
-                const _soilData = {}
-                const _times = []
-                data.reverse().forEach((reading) => {
-                    if (reading.soil.length > 1) {
-                        const date = new Date(reading.createdAt)
-                        const time = date.getHours() + ":" + date.getMinutes()
-                        _times.push(time)
-                        reading.soil.forEach((plant) => {
-                            if (typeof _soilData[plant.id] !== "undefined") {
-                                _soilData[plant.id].push(plant.soil)
-                            } else {
-                                _soilData[plant.id] = [plant.soil]
+            .then((plantData) => {
+                fetch('http://18.231.172.73/sensor/get?tent=1')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        const _soil = []
+                        const _soilData = {}
+                        const _times = []
+                        data.reverse().forEach((reading) => {
+                            if (reading.soil.length > 1) {
+                                const date = new Date(reading.createdAt)
+                                const time = date.getHours() + ":" + date.getMinutes()
+                                _times.push(time)
+                                reading.soil.forEach((plant) => {
+                                    if (typeof _soilData[plant.id] !== "undefined") {
+                                        _soilData[plant.id].push(plant.soil)
+                                    } else {
+                                        _soilData[plant.id] = [plant.soil]
+                                    }
+                                })
                             }
                         })
-                    }
-                })
 
-                for (const [key, value] of Object.entries(_soilData)) {
-                    _soil.push({ name: key, data: value })
-                }
+                        for (const [key, value] of Object.entries(_soilData)) {
+                            plantData.forEach((plant) => {
+                                if (plant.id == key) {
+                                    _soil.push({ name: key + " - " + plant.name, data: value })
+                                }
+                            })
+                        }
 
-                setTimes(_times)
-                setData(_soil)
-            }).catch((err) => {
-                console.log(err);
-                setTimes([])
-                setData([])
-            });
+                        setTimes(_times)
+                        setData(_soil)
+                    }).catch((err) => {
+                        console.log(err);
+                        setTimes([])
+                        setData([])
+                    });
+            })
     }, []);
 
     const soilChartOptions = {

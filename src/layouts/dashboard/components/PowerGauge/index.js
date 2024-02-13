@@ -14,7 +14,7 @@ function PowerGauge() {
 	
 	const [power, setPower] = useState([]);
 	useEffect(() => {
-		fetch('http://54.94.8.124/sensor/get?tent=1')
+		fetch('http://18.231.172.73/sensor/get?tent=1')
 			.then((res) => res.json())
 			.then((data) => {
 				setPower(parseInt(data[0].power))

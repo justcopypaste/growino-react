@@ -1,25 +1,6 @@
-/*!
-
-=========================================================
-* Vision UI Free React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/vision-ui-free-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com/)
-* Licensed under MIT (https://github.com/creativetimofficial/vision-ui-free-react/blob/master LICENSE.md)
-
-* Design and Coded by Simmmple & Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 // @mui material components
 import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
-import { Card, LinearProgress, Stack } from "@mui/material";
+import { Card, Stack } from "@mui/material";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -29,18 +10,13 @@ import VuiProgress from "components/VuiProgress";
 // Vision UI Dashboard React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 import linearGradient from "assets/theme/functions/linearGradient";
 
 // Vision UI Dashboard React base styles
-import typography from "assets/theme/base/typography";
 import colors from "assets/theme/base/colors";
 
 // Dashboard layout components
 import Camera from "layouts/dashboard/components/Camera";
-import Projects from "layouts/dashboard/components/Projects";
-import OrderOverview from "layouts/dashboard/components/OrderOverview";
 import TempGauge from "layouts/dashboard/components/TempGauge";
 import HumGauge from "layouts/dashboard/components/HumGauge";
 import PowerGauge from "layouts/dashboard/components/PowerGauge";
@@ -48,60 +24,16 @@ import SoilChart from "layouts/dashboard/components/SoilChart";
 import TempChart from "layouts/dashboard/components/TempChart";
 
 // React icons
-import { IoIosRocket } from "react-icons/io";
-import { IoCash, IoGlobe, IoPower, IoPricetag } from "react-icons/io5";
-import { IoBuild } from "react-icons/io5";
-import { IoWallet } from "react-icons/io5";
-import { IoDocumentText } from "react-icons/io5";
-import { FaBolt, FaDollarSign, FaShoppingCart } from "react-icons/fa";
+import { FaBolt, FaDollarSign } from "react-icons/fa";
 
 // Data
-import LineChart from "examples/Charts/LineCharts/LineChart";
 import BarChart from "examples/Charts/BarCharts/BarChart";
-import { tempChartData, soilChartData } from "layouts/dashboard/data/lineChartData";
-import { tempChartOptions, soilChartOptions } from "layouts/dashboard/data/lineChartOptions";
 import { barChartDataDashboard } from "layouts/dashboard/data/barChartData";
 import { barChartOptionsDashboard } from "layouts/dashboard/data/barChartOptions";
-
-
-
-function getSensorData() {
-  fetch("http://54.94.8.124/sensor/get?tent=1", {
-    headers: {
-      "User-Agent": "PostmanRuntime/7.29.2",
-      "Content-Type": "application/json",
-    },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-
-      // for (const reading of data) {
-      //   if (reading.temperature) {
-      //     temp.push(reading.temperature);
-      //   }
-      //   if (reading.humidity) {
-      //     hum.push(reading.humidity);
-      //   }
-      //   if (reading.power) {
-      //     power.push(reading.power);
-      //   }
-      //   if (reading.soil) {
-      //     soil.push(reading.soil);
-      //   }
-      // }
-    
-      console.log(data);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}
 
 function Dashboard() {
   const { gradients } = colors;
   const { cardContent } = gradients;
-
-  // getSensorData()
 
   return (
     <DashboardLayout>
