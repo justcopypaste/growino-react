@@ -2,50 +2,27 @@
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Table from "examples/Tables/Table";
 
 /* eslint-disable react/prop-types */
 // @mui material components
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-import VuiProgress from "components/VuiProgress";
 import { useState, useEffect } from 'react';
-
-// react-router-dom components
-import { Link } from "react-router-dom";
-
-// @mui material components
-import Icon from "@mui/material/Icon";
-import IconButton from "@mui/material/IconButton";
-import Stack from "@mui/material/Stack";
-
-// Icons
-import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 
 // Vision UI Dashboard React components
 import VuiInput from "components/VuiInput";
 import VuiButton from "components/VuiButton";
-import VuiSwitch from "components/VuiSwitch";
-import GradientBorder from "examples/GradientBorder";
 
 // Vision UI Dashboard assets
 import radialGradient from "assets/theme/functions/radialGradient";
-import rgba from "assets/theme/functions/rgba";
 import palette from "assets/theme/base/colors";
 import borders from "assets/theme/base/borders";
-
-// Authentication layout components
-import CoverLayout from "layouts/authentication/components/CoverLayout";
-
-// Images
-import bgSignIn from "assets/images/signUpImage.png";
-import { BrowserView } from 'react-device-detect';
 
 const handleClick = (id) => {
     const [rows, setData] = useState([]);
     useEffect(() => {
-        fetch('http://18.231.172.73/plant')
+        fetch('https://growino.app/api/plants')
             .then((res) => res.json())
             .then((data) => {
                 let _rows = []

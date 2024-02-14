@@ -17,7 +17,7 @@ const HumGauge = () => {
 
 	const [humidity, setHumidity] = useState([]);
 	useEffect(() => {
-		fetch('http://18.231.172.73/sensor/get?tent=1')
+		fetch('https://growino.app/api/sensor?tent=1')
 			.then((res) => res.json())
 			.then((data) => {
 				setHumidity(parseInt(data[0].humidity))

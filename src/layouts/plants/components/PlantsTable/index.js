@@ -72,7 +72,7 @@ function PlantsTable() {
   const [rows, setData] = useState([]);
 
   useEffect(() => {
-    fetch('http://18.231.172.73/plant')
+    fetch('https://growino.app/api/plants')
       .then((res) => res.json())
       .then((data) => {
         let _rows = []

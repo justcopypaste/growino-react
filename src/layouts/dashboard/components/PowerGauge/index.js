@@ -14,7 +14,7 @@ function PowerGauge() {
 	
 	const [power, setPower] = useState([]);
 	useEffect(() => {
-		fetch('http://18.231.172.73/sensor/get?tent=1')
+		fetch('https://growino.app/api/sensor?tent=1')
 			.then((res) => res.json())
 			.then((data) => {
 				setPower(parseInt(data[0].power))
