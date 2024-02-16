@@ -34,12 +34,21 @@ const columns = [
   { name: "eliminar", align: "center" },
 ]
 
-const handleClick = (id) => console.log("click " + id);
+const deletePlant = (id) => {
+  if (confirm(`Seguro que quieres eliminar la plata con id ${id}?`)) {
+    fetch(`https://growino.app/api/plants?id=${id}`, {
+      method: "DELETE"
+    })
+      .then((res) => window.location.reload())
+      .catch((err) => alert(err))
+  }
+};
+const editPlant = (id) => console.log("edit " + id);
 
 function getPlant(data) {
   const _date = new Date(data.plantedDate)
   const date = _date.getDate() + "/" + (_date.getMonth() + 1) + "/" + _date.getFullYear()
-  
+
   return {
     id: (
       <VuiTypography pl="26px" color="white" variant="button" fontWeight="medium">
@@ -62,8 +71,8 @@ function getPlant(data) {
       </VuiTypography>
     ),
     cosecha: <Completion value={60} color="info" />,
-    editar: <Icon sx={{ mr: "4px" }}>edit</Icon>,
-    eliminar: <Icon sx={{ mr: "4px" }}>delete</Icon>,
+    editar: <Icon sx={{ mr: "4px" }} onClick={() => { editPlant(data.id) }}>edit</Icon>,
+    eliminar: <Icon sx={{ mr: "4px" }} onClick={() => { deletePlant(data.id) }}>delete</Icon>,
 
   }
 }
