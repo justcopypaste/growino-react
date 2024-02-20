@@ -47,6 +47,8 @@ const sendData = (payload) => {
     document.getElementById("dateInput").value = ""
     document.getElementById("tentInput").value = ""
 
+    payload.userid = window.localStorage.getItem("userid")
+
     fetch('https://growino.app/api/plants', {
         method: "POST",
         headers: {

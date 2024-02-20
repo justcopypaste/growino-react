@@ -9,16 +9,18 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { useState, useEffect } from 'react';
 
 function PowerGauge() {
-	const { info, gradients } = colors;
+	const { gradients } = colors;
 	const { cardContent } = gradients;
-	
+
 	const [power, setPower] = useState([]);
+
+	const userid = window.localStorage.getItem("userid")
 	useEffect(() => {
-		fetch('https://growino.app/api/sensor?tent=1')
+		fetch(`https://growino.app/api/sensor?userid=${userid}&tent=1`)
 			.then((res) => res.json())
 			.then((data) => {
 				setPower(parseInt(data[0].power))
-			}).catch(()=>{
+			}).catch(() => {
 				setPower(420)
 			});
 	}, []);
@@ -120,7 +122,7 @@ function PowerGauge() {
 					<VuiBox sx={{ position: 'relative', display: 'inline-flex' }}>
 						<CircularProgress
 							variant='determinate'
-							value={power/6}
+							value={power / 6}
 							size={window.innerWidth >= 1024 ? 200 : window.innerWidth >= 768 ? 170 : 200}
 							color='warning'
 						/>

@@ -25,17 +25,55 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgSignIn from "assets/images/signInImage.png";
 
 function SignIn() {
-  const [rememberMe, setRememberMe] = useState(true);
+  const [_email, setEmail] = useState("");
+  const [_pass, setPass] = useState("");
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const handleEmail = (event) => setEmail(event.target.value)
+  const handlePassword = (event) => setPass(event.target.value)
+
+  const handleSignIn = () => {
+    console.log(_email, _pass);
+    if (!_email) {
+      return
+    }
+    if (!_pass) {
+      return
+    }
+
+    const payload = {
+      email: _email,
+      password: _pass
+    }
+
+    fetch('https://growino.app/api/login', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          window.localStorage.setItem("userid", data.data.userid)
+          window.location.assign('/dashboard')
+        } else {
+          alert(data.message)
+        }
+      }).catch((err) => {
+        console.log(err);
+        alert("Ocurrio un error inesperado")
+      });
+  }
 
   return (
     <CoverLayout
-      title="Nice to see you!"
+      title="INICIAR SESIÓN"
       color="white"
-      description="Enter your email and password to sign in"
-      premotto="INSPIRED BY THE FUTURE:"
-      motto="THE VISION UI DASHBOARD"
+      premotto=""
+      motto=""
+      description=""
       image={bgSignIn}
     >
       <VuiBox component="form" role="form">
@@ -55,13 +93,13 @@ function SignIn() {
               palette.gradients.borderLight.angle
             )}
           >
-            <VuiInput type="email" placeholder="Your email..." fontWeight="500" />
+            <VuiInput type="email" placeholder="ejemplo@growino.app" fontWeight="500" onChange={handleEmail} />
           </GradientBorder>
         </VuiBox>
         <VuiBox mb={2}>
           <VuiBox mb={1} ml={0.5}>
             <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
-              Password
+              Contraseña
             </VuiTypography>
           </VuiBox>
           <GradientBorder
@@ -76,36 +114,25 @@ function SignIn() {
           >
             <VuiInput
               type="password"
-              placeholder="Your password..."
+              placeholder="********"
+              onChange={handlePassword}
               sx={({ typography: { size } }) => ({
                 fontSize: size.sm,
               })}
             />
           </GradientBorder>
         </VuiBox>
-        <VuiBox display="flex" alignItems="center">
-          <VuiSwitch color="info" checked={rememberMe} onChange={handleSetRememberMe} />
-          <VuiTypography
-            variant="caption"
-            color="white"
-            fontWeight="medium"
-            onClick={handleSetRememberMe}
-            sx={{ cursor: "pointer", userSelect: "none" }}
-          >
-            &nbsp;&nbsp;&nbsp;&nbsp;Remember me
-          </VuiTypography>
-        </VuiBox>
         <VuiBox mt={4} mb={1}>
-          <VuiButton color="info" fullWidth>
-            SIGN IN
+          <VuiButton color="info" fullWidth onClick={handleSignIn}>
+            INICIAR SESIÓN
           </VuiButton>
         </VuiBox>
         <VuiBox mt={3} textAlign="center">
           <VuiTypography variant="button" color="text" fontWeight="regular">
-            Don&apos;t have an account?{" "}
+            No tienes una cuenta?{" "}
             <VuiTypography
               component={Link}
-              to="/authentication/sign-up"
+              to="/register"
               variant="button"
               color="white"
               fontWeight="medium"

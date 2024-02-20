@@ -35,6 +35,12 @@ function Dashboard() {
   const { gradients } = colors;
   const { cardContent } = gradients;
 
+  const userid = window.localStorage.getItem("userid")
+  if (!userid) {
+    navigate("/login")
+    // window.location.assign("/login")
+  }
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -87,7 +93,7 @@ function Dashboard() {
               <HumGauge />
             </Grid>
             <Grid item xs={12} lg={6} xl={6}>
-              <SoilChart/>
+              <SoilChart />
             </Grid>
 
             <Grid item xs={12} lg={6} xl={6}>
@@ -98,7 +104,7 @@ function Dashboard() {
         <VuiBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={6} xl={6}>
-              <TempChart/>
+              <TempChart />
             </Grid>
             <Grid item xs={12} lg={6} xl={6}>
               <Card>

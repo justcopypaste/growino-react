@@ -11,6 +11,12 @@ import { VisionUIControllerProvider } from "context";
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
+if (window.location.pathname != "/login") {
+  const userid = window.localStorage.getItem("userid")
+  if (!userid) {
+    window.location.assign("/login")
+  }
+}
 
 root.render(
   <BrowserRouter>

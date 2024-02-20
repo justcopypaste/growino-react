@@ -35,9 +35,6 @@ import SignUp from "layouts/authentication/sign-up";
 import { IoBulb, IoBulbSharp, IoLeaf, IoLeafSharp, IoRocketSharp, IoSettings, IoSettingsOutline, IoSettingsSharp } from "react-icons/io5";
 import { IoIosDocument } from "react-icons/io";
 import { BsFillPersonFill } from "react-icons/bs";
-import { IoBuild } from "react-icons/io5";
-import { BsCreditCardFill } from "react-icons/bs";
-import { IoStatsChart } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
 
 const routes = [
@@ -87,24 +84,24 @@ const routes = [
     component: Billing,
     noCollapse: true,
   },
-  // {
-  //   type: "collapse",
-  //   name: "Sign In",
-  //   key: "sign-in",
-  //   route: "/authentication/sign-in",
-  //   icon: <IoIosDocument size="15px" color="inherit" />,
-  //   component: SignIn,
-  //   noCollapse: true,
-  // },
-  // {
-  //   type: "collapse",
-  //   name: "Sign Up",
-  //   key: "sign-up",
-  //   route: "/authentication/sign-up",
-  //   icon: <IoRocketSharp size="15px" color="inherit" />,
-  //   component: SignUp,
-  //   noCollapse: true,
-  // },
+  {
+    type: "collapse",
+    name: "Sign In",
+    key: "sign-in",
+    route: "/login",
+    icon: <IoIosDocument size="15px" color="inherit" />,
+    component: SignIn,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Sign Up",
+    key: "sign-up",
+    route: "/register",
+    icon: <IoRocketSharp size="15px" color="inherit" />,
+    component: SignUp,
+    noCollapse: true,
+  }
 ];
 
 export default routes;

@@ -7,8 +7,10 @@ import ReactApexChart from "react-apexcharts";
 function TempChart() {
     const [data, setData] = useState([]);
     const [times, setTimes] = useState([]);
+    
+	const userid = window.localStorage.getItem("userid")
     useEffect(() => {
-        fetch('https://growino.app/api/sensor?tent=1')
+        fetch(`https://growino.app/api/sensor?userid=${userid}&tent=1`)
             .then((res) => res.json())
             .then((data) => {
                 const _temp = []

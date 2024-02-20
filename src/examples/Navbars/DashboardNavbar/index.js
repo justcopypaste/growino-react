@@ -168,7 +168,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
           <VuiBox sx={(theme) => navbarRow(theme, { isMini })}>
 
             <VuiBox color={light ? "white" : "inherit"}>
-              {/* <Link to="/authentication/sign-in">
+              {/* <Link to="/login">
                 <IconButton sx={navbarIconButton} size="small">
                   <Icon
                     sx={({ palette: { dark, white } }) => ({

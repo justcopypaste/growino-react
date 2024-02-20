@@ -9,11 +9,13 @@ const soilColors = ["#ffb370", "#eb2f6d", "#4eedbb", "#2CD9FF", "#b042e3", "#007
 function SoilChart() {
     const [soil, setData] = useState([]);
     const [times, setTimes] = useState([]);
+
+    const userid = window.localStorage.getItem("userid")
     useEffect(() => {
-        fetch('https://growino.app/api/plants')
+        fetch(`https://growino.app/api/plants?userid=${userid}`)
             .then((res) => res.json())
             .then((plantData) => {
-                fetch('https://growino.app/api/sensor?tent=1')
+                fetch(`https://growino.app/api/sensor?userid=${userid}&tent=1`)
                     .then((res) => res.json())
                     .then((data) => {
                         const _soil = []

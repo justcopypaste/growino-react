@@ -1,5 +1,3 @@
-
-
 // @mui material components
 import Card from "@mui/material/Card";
 import Table from "examples/Tables/Table";
@@ -36,7 +34,7 @@ const columns = [
 
 const deletePlant = (id) => {
   if (confirm(`Seguro que quieres eliminar la plata con id ${id}?`)) {
-    fetch(`https://growino.app/api/plants?id=${id}`, {
+    fetch(`https://growino.app/api/plants?userid=${userid}&id=${id}`, {
       method: "DELETE"
     })
       .then((res) => window.location.reload())
@@ -80,8 +78,9 @@ function getPlant(data) {
 function PlantsTable() {
   const [rows, setData] = useState([]);
 
+  const userid = window.localStorage.getItem("userid")
   useEffect(() => {
-    fetch('https://growino.app/api/plants')
+    fetch(`https://growino.app/api/plants?userid=${userid}`)
       .then((res) => res.json())
       .then((data) => {
         let _rows = []

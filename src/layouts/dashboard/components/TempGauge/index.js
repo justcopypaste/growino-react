@@ -14,10 +14,11 @@ const TempGauge = () => {
 	const { gradients } = colors;
 	const { cardContent } = gradients;
 
-
 	const [temp, setTemp] = useState([]);
+
+	const userid = window.localStorage.getItem("userid")
 	useEffect(() => {
-		fetch('https://growino.app/api/sensor?tent=1')
+		fetch(`https://growino.app/api/sensor?userid=${userid}&tent=1`)
 			.then((res) => res.json())
 			.then((data) => {
 				setTemp(parseFloat(data[0].temperature))

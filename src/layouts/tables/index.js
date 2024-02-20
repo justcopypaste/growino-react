@@ -74,7 +74,7 @@ function Tables() {
           </VuiBox>
         </Card>
       </VuiBox>
-      <Footer />
+      {/* <Footer /> */}
     </DashboardLayout>
   );
 }
