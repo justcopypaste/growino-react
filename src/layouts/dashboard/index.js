@@ -35,12 +35,6 @@ function Dashboard() {
   const { gradients } = colors;
   const { cardContent } = gradients;
 
-  const userid = window.localStorage.getItem("userid")
-  if (!userid) {
-    navigate("/login")
-    // window.location.assign("/login")
-  }
-
   return (
     <DashboardLayout>
       <DashboardNavbar />

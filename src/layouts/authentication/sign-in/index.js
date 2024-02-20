@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
@@ -27,6 +27,7 @@ import bgSignIn from "assets/images/signInImage.png";
 function SignIn() {
   const [_email, setEmail] = useState("");
   const [_pass, setPass] = useState("");
+  let history = useHistory();
 
   const handleEmail = (event) => setEmail(event.target.value)
   const handlePassword = (event) => setPass(event.target.value)
@@ -57,7 +58,7 @@ function SignIn() {
         console.log(data);
         if (data.success) {
           window.localStorage.setItem("userid", data.data.userid)
-          window.location.assign('/dashboard')
+          history.push('/dashboard')
         } else {
           alert(data.message)
         }
