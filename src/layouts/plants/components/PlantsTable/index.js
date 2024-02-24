@@ -34,6 +34,7 @@ const columns = [
 
 const deletePlant = (id) => {
   if (confirm(`Seguro que quieres eliminar la plata con id ${id}?`)) {
+    const userid = window.localStorage.getItem("userid")
     fetch(`https://growino.app/api/plants?userid=${userid}&id=${id}`, {
       method: "DELETE"
     })
