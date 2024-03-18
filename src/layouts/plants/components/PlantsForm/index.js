@@ -49,7 +49,7 @@ const sendData = (payload) => {
 
     payload.userid = window.localStorage.getItem("userid")
 
-    fetch('https://growino.app/api/plants', {
+    fetch('https://www.growino.app/api/plants', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

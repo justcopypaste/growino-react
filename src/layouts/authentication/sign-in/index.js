@@ -46,7 +46,7 @@ function SignIn() {
       password: _pass
     }
 
-    fetch('https://growino.app/api/login', {
+    fetch('https://www.growino.app/api/login', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

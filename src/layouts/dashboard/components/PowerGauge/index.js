@@ -16,7 +16,7 @@ function PowerGauge() {
 
 	const userid = window.localStorage.getItem("userid")
 	useEffect(() => {
-		fetch(`https://growino.app/api/sensor?userid=${userid}&tent=1`)
+		fetch(`https://www.growino.app/api/sensor?userid=${userid}&tent=1`)
 			.then((res) => res.json())
 			.then((data) => {
 				setPower(parseInt(data[0].power))
