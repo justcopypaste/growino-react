@@ -5,11 +5,10 @@ const Camera = ({ url }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    fetch(`http://ip-api.com/json/www.growino.app`)
+    fetch(`https://www.growino.app:420/api/cam`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        const url = `ws://${data.query}:4000`
+        const url = `wss://${data.ip}:4000`
 
         let player;
         if (canvasRef.current) {

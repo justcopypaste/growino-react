@@ -12,10 +12,10 @@ function SoilChart() {
 
     const userid = window.localStorage.getItem("userid")
     useEffect(() => {
-        fetch(`https://www.growino.app/api/plants?userid=${userid}`)
+        fetch(`https://www.growino.app:420/api/plants?userid=${userid}`)
             .then((res) => res.json())
             .then((plantData) => {
-                fetch(`https://www.growino.app/api/sensor?userid=${userid}&tent=1`)
+                fetch(`https://www.growino.app:420/api/sensor?userid=${userid}&tent=1&limit=24`)
                     .then((res) => res.json())
                     .then((data) => {
                         const _soil = []
