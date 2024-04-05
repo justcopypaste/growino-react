@@ -24,7 +24,7 @@
 
 // Vision UI Dashboard React layouts
 import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
+import Light from "layouts/light";
 import Billing from "layouts/billing";
 import Profile from "layouts/profile";
 import Plants from "layouts/plants";
@@ -64,7 +64,7 @@ const routes = [
     key: "light",
     route: "/light",
     icon: <IoBulbSharp size="15px" color="inherit" />,
-    component: Tables,
+    component: Light,
     noCollapse: true,
   },
   {

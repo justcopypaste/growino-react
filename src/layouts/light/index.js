@@ -11,7 +11,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import LightCard from "./components/LightCard"
 
 
-function Tables() {
+function Light() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -27,4 +27,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default Light;
