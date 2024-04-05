@@ -7,10 +7,10 @@ import ReactApexChart from "react-apexcharts";
 function TempChart() {
     const [data, setData] = useState([]);
     const [times, setTimes] = useState([]);
-    
-	const userid = window.localStorage.getItem("userid")
+
+    const userid = window.localStorage.getItem("userid")
     useEffect(() => {
-        fetch(`https://www.growino.app:420/api/sensor?userid=${userid}&tent=1&limit=24`)
+        fetch(`https://www.growino.app:420/api/sensor?userid=${userid}&limit=24`)
             .then((res) => res.json())
             .then((data) => {
                 const _temp = []
@@ -19,7 +19,8 @@ function TempChart() {
                 data.reverse().forEach((reading) => {
                     if (reading.temperature && reading.humidity && `${reading.temperature}`.toLocaleLowerCase() != "nan" && `${reading.humidity}`.toLocaleLowerCase() != "nan") {
                         const date = new Date(reading.createdAt)
-                        const time = date.getHours() + ":" + date.getMinutes()
+                        const hours = date.getHours() + date.getTimezoneOffset() / 60
+                        const time = hours + ":" + date.getMinutes()
                         _times.push(time)
                         _temp.push(reading.temperature)
                         _hum.push(reading.humidity)

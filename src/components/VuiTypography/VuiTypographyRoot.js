@@ -6,7 +6,7 @@ import { styled } from "@mui/material/styles";
 
 export default styled(Typography)(({ theme, ownerState }) => {
   const { palette, typography, functions } = theme;
-  const { color, textTransform, verticalAlign, fontWeight, opacity, textGradient } = ownerState;
+  const { color, textTransform, verticalAlign, fontWeight, opacity, textGradient, fontSize } = ownerState;
 
   const { gradients, transparent } = palette;
   const { fontWeightLight, fontWeightRegular, fontWeightMedium, fontWeightBold } = typography;
@@ -33,13 +33,29 @@ export default styled(Typography)(({ theme, ownerState }) => {
     zIndex: 1,
   });
 
-  return {
-    opacity,
-    textTransform,
-    verticalAlign,
-    textDecoration: "none",
-    color: color === "inherit" || !palette[color] ? "inherit" : palette[color].main,
-    fontWeight: fontWeights[fontWeight] && fontWeights[fontWeight],
-    ...(textGradient && gradientStyles()),
-  };
+  // let fontSize2 = !`${fontSize}`.includes("px") ? `${fontSize}px` : fontSize
+  // console.log(fontSize2);
+  if (fontSize) {
+    return {
+      opacity,
+      textTransform,
+      verticalAlign,
+      fontSize,
+      textDecoration: "none",
+      color: color === "inherit" || !palette[color] ? "inherit" : palette[color].main,
+      fontWeight: fontWeights[fontWeight] && fontWeights[fontWeight],
+      ...(textGradient && gradientStyles()),
+    };
+  } else {
+    return {
+      opacity,
+      textTransform,
+      verticalAlign,
+      textDecoration: "none",
+      color: color === "inherit" || !palette[color] ? "inherit" : palette[color].main,
+      fontWeight: fontWeights[fontWeight] && fontWeights[fontWeight],
+      ...(textGradient && gradientStyles()),
+    };
+  }
+
 });

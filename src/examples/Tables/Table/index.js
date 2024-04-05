@@ -29,7 +29,7 @@ function Table({ columns, rows }) {
   const { size, fontWeightBold } = typography;
   const { borderWidth } = borders;
 
-  const renderColumns = columns.map(({ name, align, width }, key) => {
+  const renderColumns = columns.map(({ name, align, width, fontSize, fontWeight }, key) => {
     let pl;
     let pr;
 
@@ -54,8 +54,8 @@ function Table({ columns, rows }) {
         pl={align === "left" ? pl : 3}
         pr={align === "right" ? pr : 3}
         textAlign={align}
-        fontSize={size.xxs}
-        fontWeight={fontWeightBold}
+        fontSize={fontSize ? fontSize : size.xxs}
+        fontWeight={fontWeight ? fontWeight : fontWeightBold}
         color="text"
         opacity={0.7}
         borderBottom={`${borderWidth[1]} solid ${grey[700]}`}

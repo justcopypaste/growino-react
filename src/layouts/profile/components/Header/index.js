@@ -1,30 +1,18 @@
 
 
-import AppBar from "@mui/material/AppBar";
-// @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-// Images
 import burceMars from "assets/images/avatar-simmmple.png";
-// Vision UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 import VuiAvatar from "components/VuiAvatar";
-// Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
-// Vision UI Dashboard React icons
-import { IoCube } from "react-icons/io5";
-import { IoDocument } from "react-icons/io5";
-import { IoBuild } from "react-icons/io5";
-// Vision UI Dashboard React example components
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { useEffect, useState } from "react";
 
 function Header() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
-  const [tabValue, setTabValue] = useState(0);
+  const [profile, setProfile] = useState([]);
 
   useEffect(() => {
     // A function that sets the orientation state of the tabs.
@@ -34,9 +22,7 @@ function Header() {
         : setTabsOrientation("horizontal");
     }
 
-    /** 
-     The event listener that's calling the handleTabsOrientation function when resizing the window.
-    */
+    //The event listener that's calling the handleTabsOrientation function when resizing the window.
     window.addEventListener("resize", handleTabsOrientation);
 
     // Call the handleTabsOrientation function to set the state with the initial value.
@@ -46,7 +32,17 @@ function Header() {
     return () => window.removeEventListener("resize", handleTabsOrientation);
   }, [tabsOrientation]);
 
-  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
+  useEffect(() => {
+    const userid = window.localStorage.getItem("userid")
+    fetch(`https://www.growino.app:420/api/profile?userid=${userid}`)
+      .then((res) => res.json())
+      .then((res) => {
+        let p = res[0]
+        p.fullName = p.name + " " + p.surname
+        setProfile(p)
+        console.log(p);
+      }).catch((err) => console.log(err))
+  }, [])
 
   return (
     <VuiBox position="relative">
@@ -110,27 +106,19 @@ function Header() {
                 },
               })}
             >
-              <VuiTypography variant="lg" color="white" fontWeight="bold">
-                Mark Johnson
-              </VuiTypography>
-              <VuiTypography variant="button" color="text" fontWeight="regular">
-                mark@simmmple.com
-              </VuiTypography>
+              {profile.fullName && (
+                <VuiTypography variant="lg" color="white" fontWeight="bold">
+                  {profile.fullName}
+                </VuiTypography>
+              )}
+              {profile.email && (
+                <VuiTypography variant="button" color="text" fontWeight="regular">
+                  {profile.email}
+                </VuiTypography>
+              )}
             </VuiBox>
           </Grid>
           <Grid item xs={12} md={6} lg={6.5} xl={6} xxl={4} sx={{ ml: "auto" }}>
-            <AppBar position="static">
-              <Tabs
-                orientation={tabsOrientation}
-                value={tabValue}
-                onChange={handleSetTabValue}
-                sx={{ background: "transparent", display: "flex", justifyContent: "flex-end" }}
-              >
-                <Tab label="OVERVIEW" icon={<IoCube color="white" size="16px" />} />
-                <Tab label="TEAMS" icon={<IoDocument color="white" size="16px" />} />
-                <Tab label="PROJECTS" icon={<IoBuild color="white" size="16px" />} />
-              </Tabs>
-            </AppBar>
           </Grid>
         </Grid>
       </Card>

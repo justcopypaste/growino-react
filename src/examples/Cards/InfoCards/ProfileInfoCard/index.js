@@ -1,24 +1,12 @@
-
-
-// prop-types is library for typechecking of props
 import PropTypes from "prop-types";
-
-// @mui material components
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
-
-// Vision UI Dashboard React components
 import VuiBox from "components/VuiBox";
 import VuiTypography from "components/VuiTypography";
 
-// Vision UI Dashboard React base styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
-
-function ProfileInfoCard({ title, description, info, social }) {
+function ProfileInfoCard({ title, dob, info }) {
   const labels = [];
   const values = [];
-  const { size } = typography;
 
   // Convert this form `objectKey` of the object key in to this `object key`
   Object.keys(info).forEach((el) => {
@@ -35,6 +23,10 @@ function ProfileInfoCard({ title, description, info, social }) {
   // Push the object values into the values array
   Object.values(info).forEach((el) => values.push(el));
 
+  // DOB
+  labels.push("date of birth")
+  values.push(new Date(dob).toLocaleDateString('en-GB', { timeZone: 'UTC' }))
+
   // Render the card info items
   const renderItems = labels.map((label, key) => (
     <VuiBox key={label} display="flex" py={1} pr={2}>
@@ -44,24 +36,6 @@ function ProfileInfoCard({ title, description, info, social }) {
       <VuiTypography variant="button" fontWeight="regular" color="white">
         &nbsp;{values[key]}
       </VuiTypography>
-    </VuiBox>
-  ));
-
-  // Render the card social media icons
-  const renderSocial = social.map(({ link, icon, color }) => (
-    <VuiBox
-      key={color}
-      component="a"
-      href={link}
-      target="_blank"
-      rel="noreferrer"
-      fontSize={size.lg}
-      color="white"
-      pr={1}
-      pl={0.5}
-      lineHeight={1}
-    >
-      {icon}
     </VuiBox>
   ));
 
@@ -77,27 +51,11 @@ function ProfileInfoCard({ title, description, info, social }) {
         </VuiTypography>
       </VuiBox>
       <VuiBox>
-        <VuiBox mb={2} lineHeight={1}>
-          <VuiTypography variant="button" color="text" fontWeight="regular">
-            {description}
-          </VuiTypography>
-        </VuiBox>
         <VuiBox opacity={0.3}>
           <Divider />
         </VuiBox>
         <VuiBox>
           {renderItems}
-          <VuiBox display="flex" py={1} pr={2} color="white">
-            <VuiTypography
-              variant="button"
-              fontWeight="regular"
-              color="text"
-              textTransform="capitalize"
-            >
-              social: &nbsp;
-            </VuiTypography>
-            {renderSocial}
-          </VuiBox>
         </VuiBox>
       </VuiBox>
     </Card>
@@ -108,8 +66,7 @@ function ProfileInfoCard({ title, description, info, social }) {
 ProfileInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  info: PropTypes.objectOf(PropTypes.string).isRequired,
-  social: PropTypes.arrayOf(PropTypes.object).isRequired,
+  info: PropTypes.objectOf(PropTypes.string).isRequired
 };
 
 export default ProfileInfoCard;

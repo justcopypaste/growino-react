@@ -30,12 +30,14 @@ import Profile from "layouts/profile";
 import Plants from "layouts/plants";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import { FaTent } from "react-icons/fa6";
 
 // Vision UI Dashboard React icons
-import { IoBulb, IoBulbSharp, IoLeaf, IoLeafSharp, IoRocketSharp, IoSettings, IoSettingsOutline, IoSettingsSharp } from "react-icons/io5";
+import { IoAnalytics, IoBulbSharp, IoRocketSharp } from "react-icons/io5";
 import { IoIosDocument } from "react-icons/io";
 import { BsFillPersonFill } from "react-icons/bs";
-import { IoHome } from "react-icons/io5";
+import { FaLeaf } from "react-icons/fa";
+
 
 const routes = [
   {
@@ -43,7 +45,7 @@ const routes = [
     name: "Dashboard",
     key: "dashboard",
     route: "/dashboard",
-    icon: <IoHome size="15px" color="inherit" />,
+    icon: <IoAnalytics size="15px" color="inherit" />,
     component: Dashboard,
     noCollapse: true,
   },
@@ -52,7 +54,7 @@ const routes = [
     name: "Plantas",
     key: "plants",
     route: "/plants",
-    icon: <IoLeafSharp size="15px" color="inherit" />,
+    icon: <FaLeaf size="15px" color="inherit" />,
     component: Plants,
     noCollapse: true,
   },
@@ -63,6 +65,15 @@ const routes = [
     route: "/light",
     icon: <IoBulbSharp size="15px" color="inherit" />,
     component: Tables,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Armarios",
+    key: "tents",
+    route: "/tents",
+    icon: <FaTent size="15px" color="inherit" />,
+    component: Billing,
     noCollapse: true,
   },
   // { type: "title", title: "", key: "account-pages" },
@@ -76,16 +87,7 @@ const routes = [
     noCollapse: true,
   },
   {
-    type: "collapse",
-    name: "Ajustes",
-    key: "settings",
-    route: "/settings",
-    icon: <IoSettingsSharp size="15px" color="inherit" />,
-    component: Billing,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
+    type: "hidden",
     name: "Sign In",
     key: "sign-in",
     route: "/login",
@@ -94,7 +96,7 @@ const routes = [
     noCollapse: true,
   },
   {
-    type: "collapse",
+    type: "hidden",
     name: "Sign Up",
     key: "sign-up",
     route: "/register",

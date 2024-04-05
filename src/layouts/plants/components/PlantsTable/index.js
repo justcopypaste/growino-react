@@ -38,7 +38,8 @@ const deletePlant = (id) => {
     fetch(`https://www.growino.app:420/api/plants?userid=${userid}&id=${id}`, {
       method: "DELETE"
     })
-      .then((res) => window.location.reload())
+      .then((res) => res.json())
+      .then((res)=>{console.log(res)})
       .catch((err) => alert(err))
   }
 };

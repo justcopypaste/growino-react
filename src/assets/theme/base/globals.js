@@ -3,16 +3,20 @@
 // Vision UI Dashboard React Base Styles
 import colors from "assets/theme/base/colors";
 import bgAdmin from "assets/images/body-background.png";
+import linearGradient from "../functions/linearGradient";
+import radialGradient from "../functions/radialGradient";
 
-const { info, dark } = colors;
+const { info, dark, gradients } = colors;
+const { body } = gradients
 export default {
   html: {
     scrollBehavior: "smooth",
     background: dark.body,
   },
   body: {
+    // background: radialGradient(body.main, body.state),
     background: `url(${bgAdmin})`,
-    backgroundSize: "cover",
+    // backgroundSize: "cover",
   },
   "*, *::before, *::after": {
     margin: 0,

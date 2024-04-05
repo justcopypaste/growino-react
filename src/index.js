@@ -4,6 +4,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Redirect } from "react-router-dom";
 import App from "App";
+import Footer from "examples/Footer";
 
 // Vision UI Dashboard React Context Provider
 import { VisionUIControllerProvider } from "context";

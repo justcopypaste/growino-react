@@ -30,7 +30,7 @@ const HumGauge = () => {
 	return (
 		<Card sx={{ height: '340px' }}>
 			<VuiBox display='flex' flexDirection='column' justifyContent="center" alignItems="center">
-				<VuiTypography variant='lg' color='white' fontWeight='bold' mb='4px'>
+				<VuiTypography  variant='lg' color='white' fontWeight='bold' mb='4px'>
 					Humedad
 				</VuiTypography>
 				<VuiBox sx={{ alignSelf: 'center', justifySelf: 'center', zIndex: '-1' }}>
@@ -87,7 +87,7 @@ const HumGauge = () => {
 						justifyContent='center'
 						alignItems='center'
 						sx={{ minWidth: '60px' }}>
-						<VuiTypography color='white' variant='h3'>
+						<VuiTypography fontSize="1.8rem" color='white' variant='h3'>
 							{humidity}%
 						</VuiTypography>
 					</VuiBox>

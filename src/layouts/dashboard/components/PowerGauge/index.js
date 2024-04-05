@@ -29,7 +29,7 @@ function PowerGauge() {
 		<Card
 			sx={{
 				height: '100%',
-				background: linearGradient(gradients.cardDark.main, gradients.cardDark.state, gradients.cardDark.deg)
+				background: linearGradient(gradients.card.main, gradients.card.state, gradients.card.deg)
 			}}>
 			<VuiBox sx={{ width: '100%' }}>
 				<VuiBox
@@ -138,12 +138,13 @@ function PowerGauge() {
 								justifyContent: 'center'
 							}}>
 							<VuiBox display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-								<VuiTypography color='text' variant='button' mb='4px'>
+								<VuiTypography  color='text' variant='button' mb='4px'>
 									Tiempo Real
 								</VuiTypography>
 								<VuiTypography
 									color='white'
 									variant='d5'
+									fontSize="1.8rem"
 									fontWeight='bold'
 									mb='4px'
 									sx={({ breakpoints }) => ({

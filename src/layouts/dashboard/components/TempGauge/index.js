@@ -35,7 +35,7 @@ const TempGauge = () => {
 				</VuiTypography>
 				<VuiBox sx={{ alignSelf: 'center', justifySelf: 'center', zIndex: '-1' }}>
 					<VuiBox sx={{ position: 'relative', display: 'inline-flex' }} marginTop="10px">
-						<CircularProgress variant='determinate' value={temp * 2.5} size={150} color='error' />
+						<CircularProgress variant='determinate' value={temp * 2.5} size={140} color='error' />
 						<VuiBox
 							sx={{
 								top: 0,
@@ -87,7 +87,7 @@ const TempGauge = () => {
 						justifyContent='center'
 						alignItems='center'
 						sx={{ minWidth: '60px' }}>
-						<VuiTypography color='white' variant='h3'>
+						<VuiTypography fontSize="1.8rem" color='white' variant='h3'>
 							{temp}°
 						</VuiTypography>
 					</VuiBox>
