@@ -34,7 +34,7 @@ function Header() {
 
   useEffect(() => {
     const userid = window.localStorage.getItem("userid")
-    fetch(`https://www.growino.app:420/api/profile?userid=${userid}`)
+    fetch(`https://api.growino.app/profile?userid=${userid}`)
       .then((res) => res.json())
       .then((res) => {
         let p = res[0]

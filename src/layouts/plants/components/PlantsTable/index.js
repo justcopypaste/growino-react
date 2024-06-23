@@ -35,7 +35,7 @@ const columns = [
 const deletePlant = (id) => {
   if (confirm(`Seguro que quieres eliminar la plata con id ${id}?`)) {
     const userid = window.localStorage.getItem("userid")
-    fetch(`https://www.growino.app:420/api/plants?userid=${userid}&id=${id}`, {
+    fetch(`https://api.growino.app/plants?userid=${userid}&id=${id}`, {
       method: "DELETE"
     })
       .then((res) => res.json())
@@ -82,7 +82,7 @@ function PlantsTable() {
 
   const userid = window.localStorage.getItem("userid")
   useEffect(() => {
-    fetch(`https://www.growino.app:420/api/plants?userid=${userid}`)
+    fetch(`https://api.growino.app/plants?userid=${userid}`)
       .then((res) => res.json())
       .then((data) => {
         let _rows = []
