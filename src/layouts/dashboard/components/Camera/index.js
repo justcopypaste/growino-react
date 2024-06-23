@@ -5,7 +5,7 @@ const Camera = ({ url }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    const url = `wss://www.growino.app:4000`
+    const url = `wss://cam.growino.app:4000`
 
     let player;
     if (canvasRef.current) {
