@@ -18,7 +18,7 @@ const HumGauge = () => {
 
 	const userid = window.localStorage.getItem("userid")
 	useEffect(() => {
-		fetch(`https://growino.app/api/sensor?userid=${userid}&tent=1`)
+		fetch(`https://growino.app/api/sensor?userid=${userid}&tent=1&limit=1`)
 			.then((res) => res.json())
 			.then((data) => {
 				setHumidity(parseInt(data[0].humidity))
