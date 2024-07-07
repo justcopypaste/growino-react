@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Card } from "@mui/material";
 
+import JSMpeg from "assets/jsmpeg.min.js"
+
 const Camera = ({ url }) => {
   const canvasRef = useRef(null);
 
@@ -9,9 +11,10 @@ const Camera = ({ url }) => {
 
     let player;
     if (canvasRef.current) {
-      player = new window.JSMpeg.Player(url, { canvas: canvasRef.current });
+      player = new JSMpeg.Player(url, { canvas: canvasRef.current });
     }
     return () => {
+      console.log('JSMpeg', JSMpeg);
       if (player) {
         player.destroy();
       }
@@ -25,7 +28,7 @@ const Camera = ({ url }) => {
       opacity: 0.85,
       padding: "0"
     })}>
-      <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
+      {/* <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} /> */}
     </Card>
   );
 };

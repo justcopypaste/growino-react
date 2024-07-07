@@ -10,7 +10,7 @@ function TempChart() {
 
     const userid = window.localStorage.getItem("userid")
     useEffect(() => {
-        fetch(`https://api.growino.app/sensor?userid=${userid}&limit=24`)
+        fetch(`https://growino.app/api/sensor?userid=${userid}&limit=24`)
             .then((res) => res.json())
             .then((data) => {
                 const _temp = []

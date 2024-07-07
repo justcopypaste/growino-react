@@ -11,7 +11,7 @@ function Overview() {
 
   useEffect(() => {
     const userid = window.localStorage.getItem("userid")
-    fetch(`https://api.growino.app/profile?userid=${userid}`)
+    fetch(`https://growino.app/api/profile?userid=${userid}`)
       .then((res) => res.json())
       .then((res) => {
         let p = res[0]
