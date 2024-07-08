@@ -28,7 +28,7 @@ const Camera = ({ url }) => {
       opacity: 0.85,
       padding: "0"
     })}>
-      {/* <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} /> */}
+      <canvas ref={canvasRef} style={{ width: '100%', height: '100%' }} />
     </Card>
   );
 };
